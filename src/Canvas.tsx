@@ -12,13 +12,13 @@ class Particle {
         this.y = y;
         this.baseX = this.x;
         this.baseY = this.y;
-        this.density = Math.random() * 300;
-        this.size = 2;
+        this.density = Math.random() * 600;
+        this.size = 3;
     }
     draw(ctx: CanvasRenderingContext2D) {
         ctx.fillStyle = 'white';
         ctx.beginPath();
-        ctx.ellipse(this.x, this.y, this.size, this.size, 0, 0, Math.PI * 7);
+        ctx.ellipse(this.x, this.y, this.size, this.size, 0, 0, Math.PI * 3);
         ctx.closePath();
         ctx.fill();
     }
@@ -39,11 +39,11 @@ class Particle {
         } else {
             if (this.x !== this.baseX) {
                 const dx = this.x - this.baseX;
-                this.x -= dx / 5;
+                this.x -= dx / 10;
             }
             if (this.y !== this.baseY) {
                 const dy = this.y - this.baseY;
-                this.y -= dy / 5;
+                this.y -= dy / 10;
             }
         }
     }
@@ -52,7 +52,7 @@ class Particle {
 function Canvas() {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const particlesArrayRef = useRef<Particle[]>([]);
-    const mouseRef = useRef({ x: 0, y: 0, radius: 100 });
+    const mouseRef = useRef({ x: 0, y: 0, radius: 75 });
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -63,8 +63,12 @@ function Canvas() {
 
             // Draw text
             ctx.fillStyle = 'white';
-            ctx.font = '30px Jost';
-            ctx.fillText('Nazanin', 30, 50);
+            ctx.font = 'lighter 12px sans-serif ';
+            ctx.fillText('Elevating Digital',16, 12);
+            ctx.fillText("Experiences",52,26)
+            ctx.fillText("Skillfully Crafted ",10,40)
+            ctx.fillText(" by a Creative ",62,54)
+            ctx.fillText("Web developer ",24,66)
 
             // Get text pixel data
             const textCords = ctx.getImageData(0, 0, window.innerWidth, window.innerHeight);
@@ -100,7 +104,7 @@ function Canvas() {
     }, []);
 
     const handleMouseMovement = (e: React.MouseEvent<HTMLCanvasElement>) => {
-        mouseRef.current = { x: e.clientX, y: e.clientY, radius: 100 };
+        mouseRef.current = { x: e.clientX, y: e.clientY, radius: 70 };
     };
 
     return <canvas onMouseMove={handleMouseMovement} ref={canvasRef} id="canvas"></canvas>;
