@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef,  useEffect } from 'react';
 
 class Particle {
     x: number;
@@ -13,7 +13,7 @@ class Particle {
         this.baseX = this.x;
         this.baseY = this.y;
         this.density = Math.random() * 600;
-        this.size = 3;
+        this.size = 4;
     }
     draw(ctx: CanvasRenderingContext2D) {
         ctx.fillStyle = 'white';
@@ -39,11 +39,11 @@ class Particle {
         } else {
             if (this.x !== this.baseX) {
                 const dx = this.x - this.baseX;
-                this.x -= dx / 10;
+                this.x -= dx / 20;
             }
             if (this.y !== this.baseY) {
                 const dy = this.y - this.baseY;
-                this.y -= dy / 10;
+                this.y -= dy / 20;
             }
         }
     }
@@ -62,13 +62,15 @@ function Canvas() {
             canvas.height = window.innerHeight;
 
             // Draw text
+            
             ctx.fillStyle = 'white';
-            ctx.font = 'lighter 12px sans-serif ';
-            ctx.fillText('Elevating Digital',16, 12);
-            ctx.fillText("Experiences",52,26)
-            ctx.fillText("Skillfully Crafted ",10,40)
-            ctx.fillText(" by a Creative ",62,54)
-            ctx.fillText("Web developer ",24,66)
+            ctx.font = 'lighter 30px sans-serif ';
+            ctx.fillText('Elevating Digital',66, 30);
+            ctx.fillText("Experiences",160,62)
+            ctx.fillText("Skillfully Crafted ",10,94)
+            ctx.fillText(" by a Creative ",70,126)
+
+            ctx.fillText("Web developer ",140,158)
 
             // Get text pixel data
             const textCords = ctx.getImageData(0, 0, window.innerWidth, window.innerHeight);
@@ -80,9 +82,9 @@ function Canvas() {
                 for (let y = 0, y2 = textCords.height; y < y2; y++) {
                     for (let x = 0, x2 = textCords.width; x < x2; x++) {
                         if (textCords.data[(y * textCords.width + x) * 4 + 3] > 128) {
-                            const positionX = x * 10 + Xoffset;
-                            const positionY = y * 10 + Yoffset;
-                            particlesArrayRef.current.push(new Particle(positionX, positionY));
+                            const positionX = x * 4 + Xoffset;
+                            const positionY = y * 4 + Yoffset;
+                            particlesArrayRef.current.push(new Particle(positionX , positionY));
                         }
                     }
                 }
@@ -104,7 +106,7 @@ function Canvas() {
     }, []);
 
     const handleMouseMovement = (e: React.MouseEvent<HTMLCanvasElement>) => {
-        mouseRef.current = { x: e.clientX, y: e.clientY, radius: 70 };
+        mouseRef.current = { x: e.clientX, y: e.clientY, radius: 100 };
     };
 
     return <canvas onMouseMove={handleMouseMovement} ref={canvasRef} id="canvas"></canvas>;
