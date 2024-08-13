@@ -117,7 +117,7 @@ function Canvas() {
             };
 
             const animate = () => {
-                const divisor = screenWidth < 768 ? 50 : 20;
+                const divisor = screenWidth < 768 ? 60 : 20;
                 if (ctx) {
                     ctx.clearRect(0, 0, screenWidth, screenHeight);
                     particlesArrayRef.current.forEach((particle) => {
@@ -162,7 +162,7 @@ function Canvas() {
             // Reset the effect after 3 seconds
             timeoutRef.current = setTimeout(() => {
                 particlesArrayRef.current.forEach(p => p.reset());
-            }, 1100); // time for the effect to finish on phones 
+            }, 4000); // time for the effect to finish on phones 
         }
     };
 
